@@ -1,0 +1,9 @@
+.logo-navbar {
+  width: 200px;
+  height: 50px;
+}
+
+.nav-after {
+  background-color: var(--link-grey);
+  border-bottom: 2px solid var(--link-grey);
+}

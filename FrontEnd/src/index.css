@@ -1,0 +1,11 @@
+:root {
+  --main-black: #050505;
+  --txt-white: #ffffff;
+  --link-grey: #e0e0e0;
+  --darkgrey: #212529;
+}
+
+.main-content {
+  padding-top: 110px;
+  min-height: calc(100dvh - 200px);
+}
