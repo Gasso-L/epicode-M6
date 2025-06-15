@@ -5,7 +5,11 @@ const verifyToken = async (req, res, next) => {
   //specifico che la rotta login è pubblica e la rotta per creare un nuovo autore, per la registrazione
   if (
     req.path === "/login" ||
-    (req.path === "/authors" && req.method === "POST")
+    (req.path === "/authors" && req.method === "POST") ||
+    req.path === "/github" ||
+    req.path === "/github/callback" ||
+    req.path === "/google" ||
+    req.path === "/google/callback"
   )
     return next();
 

@@ -3,6 +3,7 @@ import ProtectedRoutes from "../middleware/ProtectedRoutes";
 import Login from "./pages/Login";
 import BlogPage from "./pages/BlogPage";
 import SignUp from "./pages/SignUp";
+import Success from "./pages/Success";
 
 const App = () => {
   return (
@@ -10,10 +11,10 @@ const App = () => {
       <Routes>
         <Route index path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/blog" element={<BlogPage />}></Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/blog" element={<BlogPage />}></Route>
         </Route>
+        <Route path="/success" element={<Success />}></Route>
       </Routes>
     </Router>
   );
