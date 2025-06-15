@@ -6,6 +6,7 @@ const verifyToken = async (req, res, next) => {
   if (
     req.path === "/login" ||
     (req.path === "/authors" && req.method === "POST") ||
+    req.method === "PATCH" ||
     req.path === "/github" ||
     req.path === "/github/callback" ||
     req.path === "/google" ||

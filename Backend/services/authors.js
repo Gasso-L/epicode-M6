@@ -30,10 +30,7 @@ const createAuthor = async (author) => {
 
   const savedAuthor = await newAuthor.save();
 
-  return {
-    message: "Author created correctly",
-    savedAuthor,
-  };
+  return savedAuthor;
 };
 
 const updateAuthor = async (id, author) => {

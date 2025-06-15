@@ -34,7 +34,7 @@ const createAuthor = async (req, res, next) => {
   try {
     const { body } = req;
 
-    const author = await authorsService.createAuthor(body);
+    const savedAuthor = await authorsService.createAuthor(body);
 
     //Quando creo l'autore del post invio una mail a lui
     await email.send(

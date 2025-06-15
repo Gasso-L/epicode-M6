@@ -32,6 +32,7 @@ const AuthorsSchema = new mongoose.Schema(
     },
     password: {
       type: String,
+      required: true,
       min: 8,
     },
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "post", default: [] }],
