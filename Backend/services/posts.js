@@ -6,7 +6,7 @@ const findAll = async (page, pageSize) => {
   const posts = await PostSchema.find()
     .limit(pageSize)
     .skip((page - 1) * pageSize)
-    .populate("author")
+    .populate("author", "firstName lastName email avatar")
     .populate("comments", "feedback");
 
   const totalPosts = await PostSchema.countDocuments();
@@ -74,6 +74,12 @@ const deletePost = async (id) => {
   return deletepost;
 };
 
+const findPostByTitle = async (title) => {
+  return PostSchema.find({
+    title: { $regex: title, $options: "i" },
+  });
+};
+
 module.exports = {
   findAll,
   findOne,
@@ -81,4 +87,5 @@ module.exports = {
   updatePost,
   deletePost,
   updateCover,
+  findPostByTitle,
 };

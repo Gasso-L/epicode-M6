@@ -1,4 +1,5 @@
 import AllPosts from "../blog/AllPosts";
+import "../main/custommain.css";
 
 const CustomMain = () => {
   return (

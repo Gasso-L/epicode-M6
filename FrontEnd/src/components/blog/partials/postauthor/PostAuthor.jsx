@@ -2,7 +2,7 @@ import { Col, Image, Row } from "react-bootstrap";
 import "../postauthor/postauthor.css";
 
 const PostAuthor = (author) => {
-  const { name, avatar } = author;
+  const { firstName, avatar } = author;
   return (
     <Row>
       <Col xs={"auto"} className="pe-0">
@@ -10,7 +10,7 @@ const PostAuthor = (author) => {
       </Col>
       <Col>
         <div>by</div>
-        <h6>{name}</h6>
+        <h6>{firstName}</h6>
       </Col>
     </Row>
   );

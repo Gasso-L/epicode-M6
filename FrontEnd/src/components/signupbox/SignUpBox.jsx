@@ -112,6 +112,7 @@ const SignUpBox = () => {
           <Form.Group className="mb-3">
             <Form.Label>First Name</Form.Label>
             <Form.Control
+              required
               type="text"
               placeholder="First Name"
               name="firstName"
@@ -125,6 +126,7 @@ const SignUpBox = () => {
           <Form.Group className="mb-3">
             <Form.Label>Last Name</Form.Label>
             <Form.Control
+              required
               type="text"
               placeholder="Last Name"
               name="lastName"
@@ -139,6 +141,7 @@ const SignUpBox = () => {
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
             <Form.Control
+              required
               type="email"
               placeholder="Enter email"
               name="email"
@@ -163,6 +166,7 @@ const SignUpBox = () => {
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
+              required
               type="password"
               placeholder="Choose Password"
               name="password"

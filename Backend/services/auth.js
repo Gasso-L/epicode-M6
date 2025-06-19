@@ -30,6 +30,11 @@ const login = async (email, password) => {
 
   return {
     token,
+    author: {
+      id: author._id,
+      firstName: author.firstName,
+      email: author.email,
+    },
   };
 };
 

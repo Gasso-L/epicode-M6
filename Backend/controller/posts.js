@@ -123,7 +123,6 @@ const uploadFileOnDisk = async (req, res, next) => {
 
 const uploadFileOnCloudinary = async (req, res, next) => {
   try {
-    //aggiorno il campo cover nel DB con l'url dell'immagine caricata
     const { id } = req.params;
     const cover = req.file.path;
     const newCoverPost = await postsService.updateCover(id, cover);
@@ -140,6 +139,25 @@ const uploadFileOnCloudinary = async (req, res, next) => {
 
     /* res.status(200).json({ img: req.file.path }); restituisce l'url dell'immagine come risposta*/
   } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+const findPostByTitle = async (req, res, next) => {
+  try {
+    const { title } = req.query;
+    const post = await postsService.findPostByTitle(title);
+
+    if (!post || post.length === 0) {
+      throw new postsNotFoundException();
+    }
+
+    res.status(200).send({
+      statusCode: 200,
+      post,
+    });
+  } catch (error) {
     next(error);
   }
 };
@@ -152,4 +170,5 @@ module.exports = {
   deletePost,
   uploadFileOnDisk,
   uploadFileOnCloudinary,
+  findPostByTitle,
 };

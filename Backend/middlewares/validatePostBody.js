@@ -18,13 +18,7 @@ const postBodyValidation = [
     .isLength({ min: 2, max: 100 })
     .withMessage("Title must be with min 2 chars and max 100 chars"),
 
-  body("cover")
-    .notEmpty()
-    .withMessage("Cover is required")
-    .isString()
-    .withMessage("Cover must be a string")
-    .isLength({ max: 255 })
-    .withMessage("Cover must be a valid string with max 255 chars"),
+  body("cover").optional().isString().withMessage("Cover must be a string"),
 
   body("readTime.value")
     .notEmpty()

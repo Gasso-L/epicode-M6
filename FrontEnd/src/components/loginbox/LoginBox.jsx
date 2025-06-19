@@ -31,6 +31,7 @@ const LoginBox = () => {
 
     if (response.ok) {
       localStorage.setItem("token", jsonResponse.token);
+      localStorage.setItem("authorId", jsonResponse.authorId);
       navigate("/blog");
     }
 
