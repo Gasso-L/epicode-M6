@@ -12,6 +12,7 @@ const CustomNav = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("authorId");
     navigate("/");
   };
 

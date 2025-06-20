@@ -36,8 +36,34 @@ passport.use(
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: process.env.GITHUB_CALLBACK_URL,
     },
-    (accessToken, refreshToken, profile, done) => {
-      return done(null, profile);
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const email =
+          profile.emails?.[0]?.value || `${profile.username}@github.local`;
+        const avatar = profile.photos?.[0]?.value;
+
+        let existingAuthor = await authorsService.findOne({ email });
+
+        if (!existingAuthor) {
+          const randomPassword = crypto.randomBytes(12).toString("base64");
+          const hashedPassword = await bcrypt.hash(randomPassword, 10);
+
+          const newAuthorData = {
+            firstName: profile.displayName || profile.username || "GitHubUser",
+            lastName: "GitHubUser",
+            email,
+            avatar,
+            password: hashedPassword,
+          };
+
+          existingAuthor = await authorsService.createAuthor(newAuthorData);
+        }
+
+        return done(null, existingAuthor);
+      } catch (err) {
+        console.error("❌ Errore nel GitHubStrategy:", err);
+        return done(err, null);
+      }
     }
   )
 );
@@ -56,7 +82,7 @@ passport.use(
         const avatar = profile.photos?.[0]?.value;
 
         // Verifica se autore esiste già
-        let existingAuthor = await authorsService.findOne({ email });
+        const existingAuthor = await authorsService.findOne({ email });
 
         if (!existingAuthor) {
           const generatedPassword = crypto.randomBytes(12).toString("base64");
