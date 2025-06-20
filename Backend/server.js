@@ -18,7 +18,18 @@ const server = express();
 server.use("/uploads", express.static(path.join(__dirname, "./uploads"))); //cartella che conterrà dei file statici, sempre serviti
 
 server.use(express.json());
-server.use(cors());
+server.use(
+  cors({
+    origin: [
+      "https://epicode-m6-fawn.vercel.app",
+      "https://epicode-m6-ea0q69w4l-lorenzos-projects-a2690337.vercel.app",
+      "http://localhost:5173",
+    ],
+    credentials: true,
+    allowedHeaders: ["Authorization", "Content-Type"],
+  })
+);
+
 server.use(tokenVerified);
 
 server.use("/", usersRoute);
