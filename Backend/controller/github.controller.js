@@ -19,7 +19,7 @@ const manageOauthCallback = async (req, res, next) => {
       id: user.id,
       username: user.username,
       email: user.email || `${user.username}@noemail.github.local`,
-      avatar: user.photos[0].value,
+      avatar: user.avatar,
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
     const redirectUrl = `${
