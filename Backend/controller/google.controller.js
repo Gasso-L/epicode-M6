@@ -5,10 +5,10 @@ const authGoogle = async (req, res, next) => {
     const { user } = req;
     const payload = {
       id: user.id,
-      firstName: user.name.givenName,
-      lastName: user.name.familyName,
-      email: user.emails[0].value,
-      avatar: user.photos[0].value,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      avatar: user.avatar,
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
     const redirectUrl = `${

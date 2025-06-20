@@ -6,6 +6,9 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const session = require("express-session");
 const oauthGithubController = require("../controller/github.controller");
 const oauthGoogleController = require("../controller/google.controller");
+const authorsService = require("../services/authors");
+const crypto = require("crypto");
+const bcrypt = require("bcrypt");
 
 oauth.use(
   session({
@@ -34,8 +37,6 @@ passport.use(
       callbackURL: process.env.GITHUB_CALLBACK_URL,
     },
     (accessToken, refreshToken, profile, done) => {
-      // qui è il posto giusto per salvare e controllare che l'utente già non sia registrato, sul db
-
       return done(null, profile);
     }
   )
@@ -48,10 +49,35 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
-    (accessToken, refreshToken, profile, done) => {
-      // Qui puoi gestire il salvataggio dell'utente nel database
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const email =
+          profile.emails?.[0]?.value || `${profile.id}@google.local`;
+        const avatar = profile.photos?.[0]?.value;
 
-      return done(null, profile);
+        // Verifica se autore esiste già
+        let existingAuthor = await authorsService.findOne({ email });
+
+        if (!existingAuthor) {
+          const generatedPassword = crypto.randomBytes(12).toString("base64");
+
+          const hashedPassword = await bcrypt.hash(generatedPassword, 10);
+
+          const newAuthorData = {
+            firstName: profile.name.givenName || profile.displayName,
+            lastName: profile.name.familyName || "",
+            email,
+            avatar,
+            password: hashedPassword,
+          };
+
+          existingAuthor = await authorsService.createAuthor(newAuthorData);
+        }
+
+        return done(null, existingAuthor);
+      } catch (err) {
+        return done(err, null);
+      }
     }
   )
 );

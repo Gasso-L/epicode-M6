@@ -47,10 +47,15 @@ const updateAuthorAvatar = async (id, avatar) => {
   return AuthorsSchema.findByIdAndUpdate(id, { avatar }, options);
 };
 
+const findOne = async (filter) => {
+  return AuthorsSchema.findOne(filter);
+};
+
 module.exports = {
   findAll,
   createAuthor,
   updateAuthor,
   deleteAuthor,
   updateAuthorAvatar,
+  findOne,
 };

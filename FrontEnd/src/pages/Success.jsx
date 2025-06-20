@@ -9,10 +9,8 @@ const Success = () => {
   const decodedToken = jwtDecode(token);
   const navigate = useNavigate();
 
-  console.log(decodedToken);
-
   const saveTokenToLocalStorage = () => {
-    localStorage.setItem("token", JSON.stringify(token));
+    localStorage.setItem("token", token);
     setTimeout(() => {
       navigate("/blog", { replace: true });
     }, 3000);
