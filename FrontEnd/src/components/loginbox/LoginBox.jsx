@@ -38,13 +38,13 @@ const LoginBox = () => {
     return jsonResponse;
   };
 
-  const onRedirectGithub = () => {
+  /*   const onRedirectGithub = () => {
     window.location.href = `${import.meta.env.VITE_SERVER_BASE_URL}/github`;
   };
 
   const onRedirectGoogle = () => {
     window.location.href = `${import.meta.env.VITE_SERVER_BASE_URL}/google`;
-  };
+  }; */
 
   return (
     <div className="login-wrapper">
@@ -75,7 +75,7 @@ const LoginBox = () => {
           <Button variant="secondary" type="submit" className="w-100">
             Login
           </Button>
-          <Button
+          {/*           <Button
             variant="primary"
             type="button"
             className="login-button mt-2 d-flex justify-content-center align-items-center gap-2"
@@ -90,7 +90,7 @@ const LoginBox = () => {
             onClick={onRedirectGoogle}
           >
             <span className="pi pi-google"></span>Login Google
-          </Button>
+          </Button> */}
           <div className="d-flex justify-content-center mt-4">
             <p>
               Don't have an Account? <Link to="/signup">Create it now</Link>
