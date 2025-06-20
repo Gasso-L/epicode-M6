@@ -144,24 +144,6 @@ const uploadFileOnCloudinary = async (req, res, next) => {
   }
 };
 
-const findPostByTitle = async (req, res, next) => {
-  try {
-    const { title } = req.query;
-    const post = await postsService.findPostByTitle(title);
-
-    if (!post || post.length === 0) {
-      throw new postsNotFoundException();
-    }
-
-    res.status(200).send({
-      statusCode: 200,
-      post,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
 module.exports = {
   findAll,
   findOne,
@@ -170,5 +152,4 @@ module.exports = {
   deletePost,
   uploadFileOnDisk,
   uploadFileOnCloudinary,
-  findPostByTitle,
 };

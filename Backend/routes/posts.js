@@ -12,7 +12,6 @@ const {
 } = require("../middlewares/multer/index");
 
 postsRouter.get("/blogPosts", postsController.findAll);
-postsRouter.get("/blogPosts/search", postsController.findPostByTitle);
 postsRouter.get("/blogPosts/:id", postsController.findOne);
 postsRouter.post(
   "/blogPosts",

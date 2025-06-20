@@ -2,7 +2,6 @@ import SinglePost from "./partials/singlepost/SinglePost";
 import { Col, Container, Row } from "react-bootstrap";
 import useSession from "../../../hooks/useSession";
 import { useState, useEffect } from "react";
-import SearchBar from "./partials/searchbar/SearchBar";
 
 const AllPosts = () => {
   const token = localStorage.getItem("token");
@@ -39,9 +38,6 @@ const AllPosts = () => {
         <h1 className="fw-bold fs-5 my-2 text-white">
           Welcome to the Strive Blog {session && session.firstName}
         </h1>
-        <div className="d-flex justify-content-center">
-          <SearchBar />
-        </div>
         {posts &&
           posts.map((post, id) => {
             return (
